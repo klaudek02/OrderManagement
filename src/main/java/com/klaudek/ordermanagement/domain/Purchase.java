@@ -1,28 +1,35 @@
 package com.klaudek.ordermanagement.domain;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.hateoas.Identifiable;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
+
+@NoArgsConstructor
 @Entity
-public class Purchase {
+@Table
+public class Purchase implements Identifiable<Long> {
 
     @Id
     @GeneratedValue
     @Getter private Long purchaseId;
-    @Getter private Long userId;
-    @Getter private String description;
-    @Getter private boolean accepted;
-    @Getter private boolean completed;
-    @Getter private LocalDateTime purchaseDate;
+    @Getter @Setter private Long userId;
+    @Getter @Setter private String description;
+    @Getter @Setter private boolean accepted;
+    @Getter @Setter private boolean completed;
+    @Getter @Setter private LocalDateTime purchaseDate;
     @Getter @Setter private LocalDateTime acceptPurchaseDate;
     @Getter @Setter private LocalDateTime finishPurchaseDate;
-    @Getter private long purchaseCost;
-    @Getter private ShippingAddress shippingAddress;
+    @Getter @Setter private long purchaseCost;
+    @Getter @Setter private ShippingAddress shippingAddress;
 
     public Purchase(String description, Long orderCost, ShippingAddress shippingAddress) {
         this(description, orderCost, shippingAddress, null);
@@ -52,5 +59,14 @@ public class Purchase {
             this.shippingAddress = shippingAddress;
         else
             throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public Long getId() {
+        return purchaseId;
+    }
+    public void setId(Long purchaseId)
+    {
+        this.purchaseId = purchaseId;
     }
 }

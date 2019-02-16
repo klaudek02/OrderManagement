@@ -17,7 +17,7 @@ public class PurchaseResourceAssembler extends ResourceAssembler<Purchase, Purch
 
         PurchaseResource resource = new PurchaseResource(purchase);
 
-        final Link selfLink = entityLinks.linkToSingleResource(Purchase.class, purchase);
+        final Link selfLink = entityLinks.linkToSingleResource(purchase);
 
         resource.add(selfLink.withSelfRel());
 

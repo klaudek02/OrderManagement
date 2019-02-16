@@ -10,7 +10,7 @@ public abstract class ResourceAssembler<DomainType, ResourceType> {
     public Collection<ResourceType> toResourceCollection(Collection<DomainType> domainObjects) {
         return domainObjects
                 .stream()
-                .map(this::toResource)
+                .map(o -> toResource(o))
                 .collect(Collectors.toList());
     }
 }

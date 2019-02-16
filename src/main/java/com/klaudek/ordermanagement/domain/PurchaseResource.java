@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 public class PurchaseResource extends ResourceSupport {
 
     @Getter private final long purchaseId;
-    @Getter private final long userId;
+    @Getter private final Long userId;
     @Getter private final String description;
     @Getter private final boolean accepted;
     @Getter private final boolean completed;
