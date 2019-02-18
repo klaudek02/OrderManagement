@@ -1,5 +1,7 @@
-package com.klaudek.ordermanagement.domain;
+package com.klaudek.ordermanagement.resource;
 
+import com.klaudek.ordermanagement.domain.Purchase;
+import com.klaudek.ordermanagement.domain.ShippingAddress;
 import lombok.Getter;
 import org.springframework.hateoas.ResourceSupport;
 
@@ -26,7 +28,7 @@ public class PurchaseResource extends ResourceSupport {
         this.completed = purchase.isCompleted();
         this.purchaseDate = purchase.getPurchaseDate();
         this.acceptPurchaseDate = purchase.getAcceptPurchaseDate();
-        this.finishPurchaseDate = purchase.getFinishPurchaseDate();
+        this.finishPurchaseDate = purchase.getCompletedFinishDate();
         this.purchaseCost = purchase.getPurchaseCost();
         this.shippingAddress = purchase.getShippingAddress();
     }

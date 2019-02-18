@@ -1,8 +1,8 @@
-package com.klaudek.ordermanagement.domain;
+package com.klaudek.ordermanagement.resource;
 
+import com.klaudek.ordermanagement.domain.Purchase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.EntityLinks;
-import org.springframework.hateoas.Identifiable;
 import org.springframework.hateoas.Link;
 import org.springframework.stereotype.Component;
 

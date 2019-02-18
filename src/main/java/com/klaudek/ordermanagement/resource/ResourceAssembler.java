@@ -1,4 +1,4 @@
-package com.klaudek.ordermanagement.domain;
+package com.klaudek.ordermanagement.resource;
 
 import java.util.Collection;
 import java.util.stream.Collectors;

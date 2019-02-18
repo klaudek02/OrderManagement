@@ -9,7 +9,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.io.Serializable;
 import java.time.LocalDateTime;
 
 
@@ -27,7 +26,7 @@ public class Purchase implements Identifiable<Long> {
     @Getter @Setter private boolean completed;
     @Getter @Setter private LocalDateTime purchaseDate;
     @Getter @Setter private LocalDateTime acceptPurchaseDate;
-    @Getter @Setter private LocalDateTime finishPurchaseDate;
+    @Getter @Setter private LocalDateTime completedFinishDate;
     @Getter @Setter private long purchaseCost;
     @Getter @Setter private ShippingAddress shippingAddress;
 
@@ -44,7 +43,7 @@ public class Purchase implements Identifiable<Long> {
         this.accepted = false;
         this.completed = false;
         this.acceptPurchaseDate = null;
-        this.finishPurchaseDate = null;
+        this.completedFinishDate = null;
     }
 
     public void setAccepted() {
@@ -54,11 +53,11 @@ public class Purchase implements Identifiable<Long> {
     {
         this.completed = true;
     }
-    public void updateShippingData(ShippingAddress shippingAddress) {
+    public void updateShippingData(ShippingAddress shippingAddress) throws UpdatingAcceptedPurchaseException {
         if(!accepted)
             this.shippingAddress = shippingAddress;
         else
-            throw new UnsupportedOperationException();
+            throw new UpdatingAcceptedPurchaseException("Purchase is accepted");
     }
 
     @Override
@@ -68,5 +67,24 @@ public class Purchase implements Identifiable<Long> {
     public void setId(Long purchaseId)
     {
         this.purchaseId = purchaseId;
+    }
+
+    public boolean makeAccepted() {
+        if(!isAccepted())
+        {
+            this.accepted = true;
+            this.acceptPurchaseDate = LocalDateTime.now();
+            return true;
+        }
+        return false;
+    }
+    public boolean makeCompleted() {
+        if(!isCompleted())
+        {
+            this.completed = true;
+            this.completedFinishDate = LocalDateTime.now();
+            return true;
+        }
+        return false;
     }
 }
